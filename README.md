@@ -6,28 +6,27 @@
 
 ### Setup
 
- First, clone the repo:
+First, clone the repo:
 
- ```shell
+```shell
 # > repository setup
 git clone https://github.com/j2frise/motus-game-vuejs.git \
-  && cd motus-game-vuejs;
+ && cd motus-game-vuejs;
 ```
 
 Then follow the steps below depending on your environment configuration.
 
 ### build and start
 
- ```shell
+```shell
 yarn install \
-  && yarn dev;
+ && yarn dev;
 ```
 
 ### test
 
- ```shell
+```shell
 yarn test:unit:ci
 ```
-
 
 Go to the [webapp main page](https://localhost:5173/). Enjoy !
