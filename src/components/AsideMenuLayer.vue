@@ -8,7 +8,10 @@
         class="aside-brand flex flex-row h-14 items-center justify-between dark:bg-slate-900">
         <div
           class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0">
-          <b class="text-red-500">MOTUS</b>
+          <img
+            src="@/assets/motus-Logo.jpg"
+            class="w-full"
+            alt="Motus logo" />
         </div>
         <button
           class="hidden lg:inline-block xl:hidden p-3"
@@ -17,7 +20,7 @@
         </button>
       </div>
       <div
-        class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars dark:aside-scrollbars-[slate]">
+        class="flex-1 overflow-y-auto overflow-x-hidden aside-scrollbars dark:aside-scrollbars-[slate] mt-8">
         <ul>
           <aside-menu-item
             v-for="(item, index) in menu"
