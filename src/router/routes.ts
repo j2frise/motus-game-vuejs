@@ -27,6 +27,22 @@ const routes: RouteRecordRaw[] = [
         name: routeNames.HOME.name,
         component: () => import('@/pages/home/HomeResumePage.vue'),
       },
+      {
+        path: 'result',
+        name: routeNames.RESULT.name,
+        component: () => import('@/pages/result/ResultPage.vue'),
+      },
+    ],
+  },
+  {
+    path: '/game',
+    component: () => import('@/layouts/GamePageLayout.vue'),
+    children: [
+      {
+        path: 'register',
+        name: routeNames.REGISTER.name,
+        component: () => import('@/pages/game/intro/RegisterPage.vue'),
+      },
     ],
   },
   {

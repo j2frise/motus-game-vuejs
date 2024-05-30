@@ -14,7 +14,9 @@
         :menu="menuAside"
         @aside-lg-close-click="isAsideLgActive = false" />
 
-      <main :class="containerMax">
+      <main
+        class="mt-8"
+        :class="containerMax">
         <router-with-transitions />
       </main>
 
@@ -31,7 +33,7 @@
   import HeaderSection from '@/layouts/section/HeaderSection.vue';
   import { storeToRefs } from 'pinia';
   import type { MenuItem } from '@/shared/type';
-  import { mdiHome } from '@mdi/js';
+  import { mdiHome, mdiInformation, mdiViewList } from '@mdi/js';
   import { containerMax } from '@/shared/constant';
   import routeNames from '@/router/routerNames';
 
@@ -47,6 +49,19 @@
       },
       icon: mdiHome,
       label: 'Accueil',
+    },
+    {
+      to: {
+        name: routeNames.RESULT.name,
+      },
+      icon: mdiViewList,
+      label: 'Résultats',
+    },
+    {
+      icon: mdiInformation,
+      label: 'Règles du jeu',
+      href: 'https://fr.wikipedia.org/wiki/Motus_(jeu_t%C3%A9l%C3%A9vis%C3%A9)',
+      target: '_blank',
     },
   ];
 </script>

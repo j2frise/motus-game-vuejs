@@ -62,7 +62,7 @@
     isAsideLgActive.value = false;
   });
 
-  const onToggleLightDark = () => {
+  const onToggleLightDark = (): void => {
     darkModeStore.set();
   };
 </script>
