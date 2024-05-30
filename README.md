@@ -2,7 +2,7 @@
 
 ## Rules
 
-For the complete rules, see this link: [https://fr.wikipedia.org/wiki/Motus_%28jeu_t%C3%A9l%C3%A9vis%C3%A9%29#R%C3%A8gles_du_jeu]
+For the complete rules, see this link: [Motus (jeu télévisé)](https://fr.wikipedia.org/wiki/Motus_%28jeu_t%C3%A9l%C3%A9vis%C3%A9%29#R%C3%A8gles_du_jeu)
 
 ## How it works
 
