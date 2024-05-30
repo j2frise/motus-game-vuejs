@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex items-center"
-    :class="[type, noWrap ? 'flex-nowrap' : 'flex-wrap', mb]">
+    :class="[type ?? '', noWrap ? 'flex-nowrap' : 'flex-wrap', mb ?? '']">
     <slot
       v-if="!!$slots.default"
       name="default" />
@@ -12,10 +12,9 @@
   import { defineProps } from 'vue';
 
   type Props = {
-    noWrap: boolean;
-    type: string;
-    classAddon: string;
-    mb: string;
+    noWrap?: boolean;
+    type?: string;
+    mb?: string;
   };
 
   defineProps<Props>();

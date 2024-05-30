@@ -4,10 +4,10 @@
       appear
       mode="out-in"
       :enter-active-class="
-        'animated ' + route.meta.transition?.enterActiveClass ?? ''
+        'animated ' + route.meta.transition?.enterActiveClass || ''
       "
       :leave-active-class="
-        'animated ' + route.meta.transition?.leaveActiveClass ?? ''
+        'animated ' + route.meta.transition?.leaveActiveClass || ''
       ">
       <component
         :is="Component"

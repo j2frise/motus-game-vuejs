@@ -14,7 +14,6 @@
 
   const router = useRouter();
 
-
   const menuItems: MenuItem[] = [
     {
       icon: mdiThemeLightDark,
@@ -45,7 +44,7 @@
   const onLeaveGame = (): void => {
     //
     router.push({
-      name: routeNames.HOME.name
-    })
+      name: routeNames.HOME.name,
+    });
   };
 </script>

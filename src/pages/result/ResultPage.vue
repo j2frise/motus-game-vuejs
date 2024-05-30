@@ -12,74 +12,74 @@
         label="Nouvelle partie"
         color="info"
         rounded-full
-        small />
+        small
+        :disabled="!dictionary" />
     </section-title-line>
 
     <card-box
+      v-if="items.length"
+      data-testid="motus_resultpage_result-games"
       class="mb-6"
       has-table>
       <table>
         <thead>
           <tr>
             <th>Joueur</th>
-            <th>Ordi</th>
-            <th>Point</th>
+            <th>Nombre de tentatives</th>
             <th>Résultat</th>
             <th>Created</th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="client in itemsPaginated"
-            :key="client.id">
-            <td data-label="Name">
+            v-for="(client, index) in itemsPaginated"
+            :key="index">
+            <td data-label="Player">
               {{ client.player }}
             </td>
-            <td data-label="Company">
-              {{ client.computer }}
-            </td>
-            <td data-label="City">
-              <b>{{ client.playerScore }}</b> / {{ client.computerScore }}
+            <td data-label="Attemps">
+              <b>{{ client.attempts }}</b> / {{ attemptNb }}
             </td>
             <td
-              data-label="Progress"
+              data-label="Result"
               class="lg:w-32">
               <div
                 class="border rounded-full inline-flex items-center capitalize leading-none text-sm py-1.5 px-4"
-                :class="colorsBgLight[client.isWin ? 'success' : 'danger']">
-                <span>{{ client.isWin ? 'Gagné' : 'Perdu' }}</span>
+                :class="colorsBgLight[!client.gameOver ? 'success' : 'danger']">
+                <span>{{ !client.gameOver ? 'Gagné' : 'Perdu' }}</span>
               </div>
             </td>
-            <td
-              data-label="Created"
-              class="lg:w-1 whitespace-nowrap">
+            <td data-label="Created">
               <small
                 class="text-gray-500 dark:text-slate-400"
-                :title="client.created"
-                >{{ client.created }}</small
+                :title="client.createdAt ?? ''"
+                >{{ client.createdAt }}</small
               >
             </td>
           </tr>
         </tbody>
       </table>
       <div class="p-3 lg:px-6 border-t border-gray-100 dark:border-slate-800">
-        <BaseLevel>
-          <BaseButtons>
-            <BaseButton
+        <base-level>
+          <base-buttons>
+            <base-button
               v-for="page in pagesList"
               :key="page"
+              :data-testid="`motus_resultpage_pagination-btn-${page}`"
               :active="page === currentPage"
               :label="page + 1"
               :color="page === currentPage ? 'lightDark' : 'whiteDark'"
               small
               @click="currentPage = page" />
-          </BaseButtons>
+          </base-buttons>
           <small>Page {{ currentPageGame }} of {{ numPages }}</small>
-        </BaseLevel>
+        </base-level>
       </div>
     </card-box>
 
-    <card-box>
+    <card-box
+      v-else
+      data-testid="motus_resultpage_empty-result-games">
       <div class="text-center py-24 text-gray-500 dark:text-slate-400">
         <p>Pas de partie trouvée.</p>
         <p
@@ -102,18 +102,19 @@
   import { computed, ref } from 'vue';
   import { colorsBgLight } from '@/shared/colors';
   import routeNames from '@/router/routerNames';
+  import { useGameStore } from '@/stores/gameStore';
+  import { useWordStore } from '@/stores/wordStore';
+  import { storeToRefs } from 'pinia';
 
-  const items = computed(() => [
-    {
-      id: 1,
-      player: 'John Doe',
-      computer: 'Scarlet',
-      playerScore: 15,
-      computerScore: 35,
-      isWin: false,
-      created: '2024-01-15 16:00',
-    },
-  ]);
+  const wordStore = useWordStore();
+  const gameStore = useGameStore();
+
+  const { dictionary } = storeToRefs(wordStore);
+  const { state: gameState, attemptNb } = storeToRefs(gameStore);
+
+  const items = computed(() =>
+    gameStore.sortCompletedGamesByDate(gameState.value.completedGames),
+  );
 
   const perPage = ref(10);
   const currentPage = ref(0);

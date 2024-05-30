@@ -4,6 +4,7 @@ import { RouteLocationNormalized } from 'vue-router';
 import App from '@/App.vue';
 import router from '@/router';
 import { useDarkModeStore } from '@/stores/darkMode';
+import { useWordStore } from '@/stores/wordStore';
 import '@/css/main.scss';
 
 // Init Pinia
@@ -15,8 +16,10 @@ createApp(App).use(router).use(pinia).mount('#app');
 // Dark mode
 // Uncomment, if you'd like to restore persisted darkMode setting, or use `prefers-color-scheme: dark`. Make sure to uncomment localStorage block in src/stores/darkMode.js
 
+const wordStore = useWordStore(pinia);
 const darkModeStore = useDarkModeStore(pinia);
 
+wordStore.fetchDictionary();
 darkModeStore.checkMode();
 
 // Default title tag

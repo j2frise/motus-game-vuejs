@@ -35,11 +35,11 @@
   const props = withDefaults(defineProps<Props>(), {
     rounded: 'rounded-2xl',
     flex: 'flex-col',
-    hasComponentLayout: undefined,
-    hasTable: undefined,
-    isForm: undefined,
-    isHoverable: undefined,
-    isModal: undefined,
+    hasComponentLayout: false,
+    hasTable: false,
+    isForm: false,
+    isHoverable: false,
+    isModal: false,
   });
 
   const emit = defineEmits(['submit']);

@@ -46,7 +46,7 @@
 
   const componentClass = computed(() => [
     'py-3',
-    hasColor.value
+    hasColor.value && props.item.color
       ? getButtonColor(props.item.color, false, true)
       : 'aside-menu-item dark:text-slate-300 dark:hover:text-white',
   ]);
