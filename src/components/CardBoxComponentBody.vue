@@ -10,7 +10,7 @@
   import { defineProps } from 'vue';
 
   type Props = {
-    noPadding: boolean;
+    noPadding?: boolean;
   };
 
   defineProps<Props>();

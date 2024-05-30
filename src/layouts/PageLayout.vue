@@ -15,7 +15,7 @@
         @aside-lg-close-click="isAsideLgActive = false" />
 
       <main
-        class="mt-8"
+        class="mt-8 pb-20"
         :class="containerMax">
         <router-with-transitions />
       </main>

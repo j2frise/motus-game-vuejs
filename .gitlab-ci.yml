@@ -1,0 +1,26 @@
+image: node:21.5.0
+
+variables:
+  CODE_PATH: .
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - ${CODE_PATH}/node_modules/
+
+testapp:
+  script:
+    - cd ${CODE_PATH}
+    - yarn install
+    - yarn build
+    - echo Linter checking ...
+    - yarn lint
+    - yarn format:ci
+    - echo Typescript checking ...
+    - yarn check
+    - echo Unit tests checking ...
+    - yarn test:unit:ci
+  tags: [front]
+  only:
+    refs:
+      - merge_requests

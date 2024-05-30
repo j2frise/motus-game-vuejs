@@ -4,18 +4,17 @@
       <card-box-widget
         color="text-blue-500"
         :icon="mdiGamepadSquare"
-        :number="512"
+        :number="nbCompletedGames"
         label="Total parties jouées" />
       <card-box-widget
         color="text-emerald-500"
         :icon="mdiTrophy"
-        :number="7770"
+        :number="nbWonGames"
         label="Total parties gagnées" />
       <card-box-widget
         color="text-yellow-500"
         :icon="mdiTimerSandFull"
-        :number="256"
-        suffix="h"
+        suffix="-"
         label="Total temps jeu" />
     </div>
 
@@ -28,6 +27,7 @@
       >
       <div class="text-2xl">
         <base-button
+          data-testid="motus_homepage_new-game-btn"
           :to="{
             name: routeNames.REGISTER.name,
           }"
@@ -35,7 +35,8 @@
           :icon="mdiPlayCircle"
           icon-size="100"
           label="Nouvelle partie"
-          rounded-full />
+          rounded-full
+          :disabled="!dictionary" />
       </div>
     </section-banner>
 
@@ -56,6 +57,23 @@
   import SectionBanner from '@/components/SectionBanner.vue';
   import { colorsBgLight } from '@/shared/colors';
   import routeNames from '@/router/routerNames';
+  import { useGameStore } from '@/stores/gameStore';
+  import { useWordStore } from '@/stores/wordStore';
+  import { storeToRefs } from 'pinia';
+  import { computed } from 'vue';
+
+  const wordStore = useWordStore();
+  const gameStore = useGameStore();
+
+  const { dictionary } = storeToRefs(wordStore);
+  const { state: gameState } = storeToRefs(gameStore);
+
+  const nbCompletedGames = computed(
+    () => gameState.value.completedGames.length,
+  );
+  const nbWonGames = computed(
+    () => gameState.value.completedGames.filter(game => !game.gameOver).length,
+  );
 </script>
 
 <style scoped>

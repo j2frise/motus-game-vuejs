@@ -1,0 +1,12 @@
+/.git
+/.svn
+/.hg
+/node_modules
+/dist
+**/.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.symlinks/
+/public
