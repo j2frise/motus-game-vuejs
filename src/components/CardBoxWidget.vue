@@ -33,7 +33,7 @@
   import { computed, useSlots } from 'vue';
 
   type Props = {
-    number: number;
+    number?: number;
     icon?: string | null;
     prefix?: string | null;
     suffix?: string | null;

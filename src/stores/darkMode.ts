@@ -1,9 +1,13 @@
 import { defineStore } from 'pinia';
 import { computed, ref } from 'vue';
 import type { DarkModeAccessiblePinia } from '@/stores/type/DarkMode';
+import { Store } from '@/modules/Storage';
 
 export const useDarkModeStore = defineStore('darkMode', () => {
   const isEnabled = ref(false);
+  const nameStorage = 'darkMode';
+
+  const darkModeStorage = computed(() => Store.get(nameStorage));
 
   function set(payload?: boolean): void {
     isEnabled.value = payload !== undefined ? payload : !isEnabled.value;
@@ -19,16 +23,14 @@ export const useDarkModeStore = defineStore('darkMode', () => {
       );
     }
 
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('darkMode', isEnabled.value ? '1' : '0');
-    }
+    Store.set(nameStorage, isEnabled.value ? '1' : '0');
   }
 
   function checkMode(): void {
     if (
-      (!localStorage['darkMode'] &&
+      (!darkModeStorage.value &&
         window.matchMedia('(prefers-color-scheme: dark)').matches) ||
-      localStorage['darkMode'] === '1'
+      darkModeStorage.value === '1'
     ) {
       set(true);
     }

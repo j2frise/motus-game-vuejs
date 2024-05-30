@@ -2,11 +2,12 @@
   <component
     :is="is"
     :class="componentClass"
-    :href="href"
-    :type="computedType"
-    :to="to"
-    :target="target"
-    :disabled="disabled">
+    :href="disabled ? undefined : href ?? undefined"
+    :type="computedType ?? null"
+    :to="disabled ? undefined : to ?? undefined"
+    :target="target ?? null"
+    :disabled="disabled"
+    :aria-active="active ? true : undefined">
     <base-icon
       v-if="icon"
       :path="icon"
@@ -26,20 +27,20 @@
   import BaseIcon from '@/components/BaseIcon.vue';
 
   type Props = {
-    label: string | number | null;
-    icon: string | null;
-    iconSize: string | number | null;
-    href: string | null;
-    target: string | null;
-    to: string | object | null;
-    type: string | null;
-    color: Color;
-    as: string | null;
-    small: boolean;
-    outline: boolean;
-    active: boolean;
-    disabled: boolean;
-    roundedFull: boolean;
+    label?: string | number | null;
+    icon?: string;
+    iconSize?: string | number;
+    href?: string;
+    target?: string;
+    to?: string | object;
+    type?: string;
+    color?: Color;
+    as?: string;
+    small?: boolean;
+    outline?: boolean;
+    active?: boolean;
+    disabled?: boolean;
+    roundedFull?: boolean;
   };
 
   const props = defineProps<Props>();
@@ -85,7 +86,14 @@
       'border',
       props.disabled ? 'cursor-not-allowed' : 'cursor-pointer',
       props.roundedFull ? 'rounded-full' : 'rounded',
-      getButtonColor(props.color, props.outline, !props.disabled, props.active),
+      props.color
+        ? getButtonColor(
+            props.color,
+            props.outline ?? false,
+            !props.disabled,
+            props.active,
+          )
+        : '',
     ];
 
     if (!props.label && props.icon) {

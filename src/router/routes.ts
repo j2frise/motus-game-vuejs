@@ -43,6 +43,16 @@ const routes: RouteRecordRaw[] = [
         name: routeNames.REGISTER.name,
         component: () => import('@/pages/game/intro/RegisterPage.vue'),
       },
+      {
+        path: 'play',
+        name: routeNames.PLAY.name,
+        component: () => import('@/pages/game/during/GameViewPage.vue'),
+      },
+      {
+        path: 'result',
+        name: routeNames.RESULT_GAME.name,
+        component: () => import('@/pages/game/outro/ResultViewPage.vue'),
+      },
     ],
   },
   {
